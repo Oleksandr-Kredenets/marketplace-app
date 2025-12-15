@@ -1,0 +1,12 @@
+**/bin
+**/obj
+**.sln
+backend/MarketPlace.*/Properties
+backend/MarketPlace.*/Migrations
+**/appsettings.json
+**/appsettings.*.json
+frontend/**/node_modules
+frontend/**/public/robots.txt
+frontend/**/public/manifest.json
+frontend/**/package*.json
+docker-compose.yml

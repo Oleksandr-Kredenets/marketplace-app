@@ -1,0 +1,27 @@
+.main-block {
+    width: 290px;
+    height: 340px;
+    padding: 20px 15px 60px 15px;
+    margin: 10px;
+    color: #000000;
+    background-color: #e6e5e5;
+    border-radius: 30px;
+}
+
+.product-price {
+    font-size: 25px
+}
+
+.product-name {
+    font-size: 20px;
+}
+
+.product-image {
+    width: 290px;
+    height: 290px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 0px;
+}
