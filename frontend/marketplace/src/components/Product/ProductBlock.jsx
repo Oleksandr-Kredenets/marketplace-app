@@ -1,12 +1,11 @@
-import classes from './ProductBlock.module.css'
-
-export default function ProductBlock({productName, productPrice, productSourceImage}){
-    const image = require('../../images/' + productSourceImage);
-    return (
-        <div className={classes['main-block']}>
-            <img className={classes['product-image']} src={image} alt='Error' />
-            <p className={classes['product-name']}>{productName}</p>
-            <p className={classes['product-price']}>{productPrice}</p>
-        </div>
-    )
+export default function ProductBlock({productTitle, productPrice}){//, productSourceImage}){
+    //const image = require('../../images/' + productSourceImage);
+    //<img className={classes['product-image']} src={image} alt='Error' />
+    
+   return (
+    <div className="w-72 h-85 px-4 pt-5 pd-15 m-2 bg-gray-200 rounded-2xl">
+        <p className="text-2xl m-0">{productTitle}</p>
+        <p className="text-3xl m-0">{productPrice}</p>
+    </div>
+   );
 }

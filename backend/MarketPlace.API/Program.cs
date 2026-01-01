@@ -23,6 +23,7 @@ public static class Program
 
         if (app.Environment.IsDevelopment())
         {
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseSwagger();
             app.UseSwaggerUI();
         }
