@@ -13,3 +13,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer utilities{
+  .input-text{
+    @apply border-2 border-gray-400 rounded-md focus:border-white m-0.5;
+  }
+}

@@ -11,3 +11,4 @@ frontend/**/public/manifest.json
 frontend/**/package*.json
 docker-compose.yml
 tasks.txt
+uploads

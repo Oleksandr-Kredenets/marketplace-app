@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react';
 import ProductContainer from './components/Product/ProductContainer';
+import AddButton from './components/Product/AddButton';
+import AddForm from './components/Product/AddForm';
 
 export default function App() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [addFormActive, setAddFormActive] = useState(false);// !!!
 
     useEffect( () => {
         const fetchData = async () => {
@@ -19,7 +22,6 @@ export default function App() {
         };
         fetchData();
     }, []);
-
     if (isLoading)
         return (
             <div className="flex justify-center items-center h-screen">
@@ -27,10 +29,13 @@ export default function App() {
             </div>
         );
     return (
-        <div className="flex justify-center">
+        <>
+            <div className="flex justify-center">
                 {/*??? images ??? */}
                 <ProductContainer products={products} />
-        </div>
+                <AddButton onClick={setAddFormActive}/>
+                {/*<AddForm isActive={addFormActive}/>*/}
+            </div>
+        </>
     );
-   
 }

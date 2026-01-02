@@ -33,6 +33,7 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateProduct(PostProductDto productRequest)
     {
+        
         Product newProduct = new Product(productRequest.UserId, productRequest.Title,
                                          productRequest.Price, productRequest.Description);
 
