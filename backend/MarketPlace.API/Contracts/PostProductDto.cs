@@ -1,4 +1,4 @@
 namespace MarketPlace.API.Contracts;
 
-public record PostProductDto(Guid UserId, double Price, string Title = "",
+public record PostProductDto(Guid UserId, string Title, double Price,
                                  string Description = "");

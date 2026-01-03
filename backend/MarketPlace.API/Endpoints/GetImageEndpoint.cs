@@ -1,2 +1,0 @@
-namespace MarketPlace.API.Endpoints;
-

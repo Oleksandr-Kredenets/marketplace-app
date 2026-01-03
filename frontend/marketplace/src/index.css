@@ -16,6 +16,7 @@ code {
 
 @layer utilities{
   .input-text{
-    @apply border-2 border-gray-400 rounded-md focus:border-white m-0.5;
+    @apply border-b-2 border-b-gray-400 outline-none focus:border-b-cyan-500
+    focus:border-white p-0;
   }
 }
