@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import ProductContainer from './components/Product/ProductContainer';
-import AddButton from './components/Product/AddButton';
-import AddForm from './components/Product/AddForm';
+import AddButton from './components/AddProductForm/AddButton';
+import AddForm from './components/AddProductForm/AddForm';
 
 export default function App() {
     const [products, setProducts] = useState([]);
@@ -38,9 +38,9 @@ export default function App() {
         <>
             <div className="flex justify-center">
                 {/*??? images ??? */}
-                <ProductContainer products={products} />
+                <ProductContainer products={products}/>
                 <AddButton onClick={setAddFormActive}/>
-                <AddForm isActive={addFormActive}/>
+                <AddForm isActive={addFormActive} setFormActive={setAddFormActive}/>
             </div>
         </>
     );
