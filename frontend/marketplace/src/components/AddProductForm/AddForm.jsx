@@ -6,7 +6,10 @@ import ImageInput from '../main/ImageInput';
 export default function AddForm({isActive, setFormActive}){
     if (isActive) return (
         <div className="fixed inset-0 flex justify-center items-center bg-black/25">
-            <form className="bg-white relative p-6 h-200 w-350 rounded-lg">
+            <form
+            method="post"
+            action="http://localhost:5011/products"
+            className="bg-white relative p-6 h-150 w-300 rounded-lg">
                 <Cross set={setFormActive}/>
                 <ImageInput/>
                 <div className="absolute right-20 h-170 w-150 ">
@@ -23,7 +26,7 @@ export default function AddForm({isActive, setFormActive}){
                 <button
                     type="submit"
                     className="bg-cyan-500 text-white rounded-2xl w-50 h-15 
-                            absolute right-1/2 bottom-10"
+                            absolute right-1/2 bottom-10 cursor-pointer"
                 >Додати</button>
             </form> 
         </div>

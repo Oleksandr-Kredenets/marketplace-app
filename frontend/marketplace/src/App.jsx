@@ -6,7 +6,7 @@ import AddForm from './components/AddProductForm/AddForm';
 export default function App() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [addFormActive, setAddFormActive] = useState(true);
+    const [addFormActive, setAddFormActive] = useState(false);
 
     // Fetch data to backend
     useEffect( () => {

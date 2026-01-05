@@ -1,7 +1,9 @@
 import {useState, useEffect} from 'react';
+import photo from '../../assets/images/gallery-photo.svg';
+
 export default function ImageInput(){
     const [previewUrl, setPreviewUrl] = useState(null);
-
+    
     // Set file url
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -19,21 +21,29 @@ export default function ImageInput(){
         }
     }, [previewUrl]);
 
+    console.log(previewUrl);
     return (
         <>
-            <div className="absolute left-40 top-35 h-85 w-85 bg-gray-200"/>
+            <div className="absolute left-20 top-25 h-85 w-85 rounded-2xl
+            bg-gray-200"/>
+            {!previewUrl && (
+                <img
+                    src={photo}
+                    className="absolute left-20 top-25 h-85 w-85"
+                />
+            )}
             {previewUrl && (
                 <img
                     src={previewUrl}
                     alt="Preview"
-                    className="absolute left-40 top-35 h-85 w-85"
+                    className="absolute left-20 top-25 h-85 w-85"
                 />
             )}
             <input
                 type="file"
                 accept=".jpg, .jpeg, .png"
                 id="fileInput"
-                className="absolute h-85 w-85 left-40 top-35 opacity-0 cursor-pointer"
+                className="absolute h-85 w-85 left-20 top-25 opacity-0 cursor-pointer"
                 onChange={handleFileChange}
             />
         </>
