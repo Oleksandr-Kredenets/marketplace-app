@@ -1,4 +1,8 @@
-export default function AddButton({onClick}){
+interface AddButtonProps{
+    onClick: () => void;
+}
+
+export default function AddButton({onClick}: AddButtonProps){
     return (
         <div className="fixed bottom-8 right-16">
             <button

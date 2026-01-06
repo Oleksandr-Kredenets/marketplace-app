@@ -1,4 +1,9 @@
-export default function ProductBlock({productTitle, productPrice}){//, productSourceImage}){
+interface ProductBlockProps{
+    productTitle: string;
+    productPrice: number;
+}
+
+export default function ProductBlock({productTitle, productPrice}: ProductBlockProps){//, productSourceImage}){
     //const image = require('../../images/' + productSourceImage);
     //<img className={classes['product-image']} src={image} alt='Error' />
     

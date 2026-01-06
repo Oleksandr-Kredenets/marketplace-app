@@ -1,4 +1,8 @@
-export default function Cross({set}){
+interface CrossProps{
+    set: Function;
+}
+
+export default function Cross({set}: CrossProps){
     return (
         <button
             onClick={() => set(false)}

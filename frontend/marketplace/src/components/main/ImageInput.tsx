@@ -2,13 +2,13 @@ import {useState, useEffect} from 'react';
 import photo from '../../assets/images/gallery-photo.svg';
 
 export default function ImageInput(){
-    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     
     // Set file url
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file){
-            const url = URL.createObjectURL(file);
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (files && files.length > 0){
+            const url = URL.createObjectURL(files[0]);
             setPreviewUrl(url);
         }
         else setPreviewUrl(null);

@@ -3,7 +3,12 @@ import PriceInput from './PriceInput';
 import DescriptionInput from './DescriptionInput';
 import ImageInput from '../main/ImageInput';
 
-export default function AddForm({isActive, setFormActive}){
+interface AddFormProps{
+    isActive: boolean;
+    setFormActive: Function;
+}
+
+export default function AddForm({isActive, setFormActive}: AddFormProps){
     if (isActive) return (
         <div className="fixed inset-0 flex justify-center items-center bg-black/25">
             <form

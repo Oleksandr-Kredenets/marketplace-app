@@ -1,20 +1,30 @@
 import {useState, useEffect} from 'react';
-import ProductContainer from './components/Product/ProductContainer';
-import AddButton from './components/AddProductForm/AddButton';
-import AddForm from './components/AddProductForm/AddForm';
+import ProductContainer from './components/Product/ProductContainer.tsx';
+import AddButton from './components/AddProductForm/AddButton.tsx';
+import AddForm from './components/AddProductForm/AddForm.tsx';
+
+interface Product{
+    id: number;
+    title: string;
+    price: number;
+}
 
 export default function App() {
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [addFormActive, setAddFormActive] = useState(false);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [addFormActive, setAddFormActive] = useState<boolean>(false);
 
     // Fetch data to backend
     useEffect( () => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:5011/products');
-                const result = await response.json();
-                setProducts(result.value);
+                fetch('http://localhost:5011/products')
+                .then((response) => {
+                    return response.json();
+                })
+                .then((result) => {
+                    setProducts(result.value);
+                });
             } catch (error) {
                 console.log(`[!] Error of loading\n${error}`);
             } finally {
@@ -39,7 +49,7 @@ export default function App() {
             <div className="flex justify-center">
                 {/*??? images ??? */}
                 <ProductContainer products={products}/>
-                <AddButton onClick={setAddFormActive}/>
+                <AddButton onClick={() => setAddFormActive(!addFormActive)}/>
                 <AddForm isActive={addFormActive} setFormActive={setAddFormActive}/>
             </div>
         </>
