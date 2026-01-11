@@ -12,7 +12,7 @@ interface Product{
 export default function App() {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [addFormActive, setAddFormActive] = useState<boolean>(false);
+    const [addFormActive, setAddFormActive] = useState<boolean>(true);
 
     // Fetch data to backend
     useEffect( () => {

@@ -31,7 +31,7 @@ export default function AddForm({isActive, setFormActive}: AddFormProps){
                 <button
                     type="submit"
                     className="bg-cyan-500 text-white rounded-2xl w-50 h-15 
-                            absolute right-1/2 bottom-10 cursor-pointer"
+                            absolute left-1/2 -translate-x-1/2 bottom-10 cursor-pointer"
                 >Додати</button>
             </form> 
         </div>
