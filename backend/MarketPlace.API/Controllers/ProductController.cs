@@ -61,8 +61,8 @@ public class ProductController : Controller
         return RedirectToAction("GetAllProducts");
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteProduct([FromQuery]Guid id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteProduct(Guid id)
     {
         await _productService.DeleteProductAsync(id);
         return RedirectToAction("GetAllProducts");

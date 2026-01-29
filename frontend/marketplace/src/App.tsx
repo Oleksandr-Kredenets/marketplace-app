@@ -4,7 +4,7 @@ import AddButton from './components/AddProductForm/AddButton.tsx';
 import AddForm from './components/AddProductForm/AddForm.tsx';
 
 interface Product{
-    id: number;
+    id: string;
     title: string;
     price: number;
 }
@@ -45,13 +45,11 @@ export default function App() {
 
     // Main app
     return (
-        <>
-            <div className="flex justify-center">
-                {/*??? images ??? */}
-                <ProductContainer products={products}/>
-                <AddButton onClick={() => setAddFormActive(!addFormActive)}/>
-                <AddForm isActive={addFormActive} setFormActive={setAddFormActive}/>
-            </div>
-        </>
+        <div className="flex justify-center items-center">
+            {/*??? images ??? */}
+            <ProductContainer products={products}/>
+            <AddButton onClick={() => setAddFormActive(!addFormActive)}/>
+            <AddForm isActive={addFormActive} setFormActive={setAddFormActive}/>
+        </div>
     );
 }

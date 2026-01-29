@@ -31,6 +31,7 @@ export default function AddForm({isActive, setFormActive}: AddFormProps){
         });
 
         setFormActive(false);
+        window.location.reload();
     };
 
     if (isActive) return (

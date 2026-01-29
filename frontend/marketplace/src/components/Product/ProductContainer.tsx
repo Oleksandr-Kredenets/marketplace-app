@@ -1,7 +1,8 @@
-import ProductBlock from "./ProductBlock.tsx"
+import { useState, useEffect } from "react";
+import ProductBlock from "./ProductBlock.tsx";
 
 interface Product{
-    id: number;
+    id: string;
     title: string;
     price: number;
 }
@@ -11,15 +12,31 @@ interface ProductContainerProps{
 }
 
 export default function ProductContainer({ products }: ProductContainerProps ){
+    const [isActiveFuncBarId, setIsActiveFuncBarId] = useState<string | null>(null);
+
+    useEffect(() => {
+        const clickHandlerOutside = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            const isClickedOutside = !target.closest('.function-menu-trigger');
+
+            if (isClickedOutside){
+                setIsActiveFuncBarId(null);
+            }
+        };
+        document.addEventListener("mousedown", clickHandlerOutside);
+        return () => document.removeEventListener("mousedown", clickHandlerOutside);
+    }, []);
+
     return (
-        <div className="flex justify-center">
-            <div className="w-300 h-dvh flex flex-wrap">
-                {products.map((product: Product) => <ProductBlock 
-                    key={product.id}
-                    productTitle={product.title}
-                    productPrice={product.price}
-                />)}
-            </div>
+        <div className="w-304 h-dvh flex flex-wrap">
+            {products.map((product: Product) => <ProductBlock 
+                id = {product.id}
+                key={product.id}
+                title={product.title}
+                price={product.price}
+                isActiveFuncBarId={isActiveFuncBarId}
+                setIsActiveFuncBarId={setIsActiveFuncBarId}
+            />)}
         </div>
     );
 }

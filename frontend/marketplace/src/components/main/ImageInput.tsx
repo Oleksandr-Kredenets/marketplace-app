@@ -21,7 +21,6 @@ export default function ImageInput(){
         }
     }, [previewUrl]);
 
-    console.log(previewUrl);
     return (
         <>
             <div className="absolute left-20 top-25 h-85 w-85 rounded-2xl
