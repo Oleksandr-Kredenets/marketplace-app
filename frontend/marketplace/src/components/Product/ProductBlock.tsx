@@ -5,13 +5,15 @@ interface productBlockProps {
     id: string;
     title: string;
     price: number;
+    imageUrl: string;
     isActiveFuncBarId: string | null;
     setIsActiveFuncBarId: (value: string | null) => void;
 }
 
-export default function ProductBlock({id, title, price, isActiveFuncBarId, setIsActiveFuncBarId}: productBlockProps){
+export default function ProductBlock({id, title, price, imageUrl, isActiveFuncBarId, setIsActiveFuncBarId}: productBlockProps){
+    console.log(imageUrl);
     return (
-        <div className="relative w-72 h-85 px-4 pt-5 pd-15 m-2 bg-gray-200 rounded-2xl">
+        <div className="relative w-72 h-85 px-4 pt-5 pd-15 m-2 bg-gray-300 rounded-2xl">
             <MoreButton
                 setIsActive={() => {
                     if (isActiveFuncBarId?.toString() === id){
@@ -25,6 +27,7 @@ export default function ProductBlock({id, title, price, isActiveFuncBarId, setIs
                 id={id}
                 isActive={id === isActiveFuncBarId?.toString()}
             />
+            <img className="h-50 w-full rounded-lg" src={imageUrl}/>
             <p className="text-2xl m-0">{title}</p>
             <p className="text-3xl m-0">{price}</p>
         </div>

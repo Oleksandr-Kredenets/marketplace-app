@@ -13,6 +13,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8" />
         <PackageReference Include="Npgsql" Version="8.0.4" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+        <PackageReference Include="Minio" Version="7.0.0" />
 
         <ProjectReference Include="../MarketPlace.Domain/MarketPlace.Domain.csproj"/>
     </ItemGroup>

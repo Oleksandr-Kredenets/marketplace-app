@@ -5,6 +5,7 @@ interface Product{
     id: string;
     title: string;
     price: number;
+    imageUrl: string;
 }
 
 interface ProductContainerProps{
@@ -34,6 +35,7 @@ export default function ProductContainer({ products }: ProductContainerProps ){
                 key={product.id}
                 title={product.title}
                 price={product.price}
+                imageUrl={product.imageUrl}
                 isActiveFuncBarId={isActiveFuncBarId}
                 setIsActiveFuncBarId={setIsActiveFuncBarId}
             />)}

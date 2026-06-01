@@ -13,22 +13,34 @@ export default function AddForm({isActive, setFormActive}: AddFormProps){
     const [productTitle, setProductTitle] = useState<string>("");
     const [productPrice, setProductPrice] = useState<string>("");
     const [productDescription, setProductDescription] = useState<string>("");
+    const [imgPreview, changeImgPreview] = useState<string | null>(null);
+    const [img, changeImg] = useState<File | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const data = {
+        const formData = new FormData();
+        /*  = {
             UserId: "3e192f73-0ef6-43be-b2f5-cf2708f803ad",
             Title: productTitle,
             Price: Number(productPrice),
-            Description: productDescription
-        };
+            Description: productDescription,
+            ImageCount: 1
+        } */
+        formData.append('userId', '3e192f73-0ef6-43be-b2f5-cf2708f803ad');
+        formData.append('title', `${productTitle}`);
+        formData.append('price', `${Number(productPrice)}`);
+        if (img) formData.append('image', img);
+        formData.append('description', `${productDescription}`);
 
-        await fetch("http://localhost:5011/products", {
+        const response = await fetch("http://localhost:5011/products", {
             method: "POST",
-            headers:{ "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: formData
         });
+
+        if (!response.ok){
+            alert(`error: ${await response.text()}`);
+        }
 
         setFormActive(false);
         window.location.reload();
@@ -41,7 +53,11 @@ export default function AddForm({isActive, setFormActive}: AddFormProps){
             onSubmit={handleSubmit}
             className="bg-white relative p-6 h-150 w-300 rounded-lg">
                 <Cross set={setFormActive}/>
-                <ImageInput/>
+                <ImageInput
+                    img={imgPreview}
+                    onChange={changeImgPreview}
+                    onFileChange={changeImg}
+                />
                 <div className="absolute right-20 h-170 w-150 ">
                     <input
                         type="text"

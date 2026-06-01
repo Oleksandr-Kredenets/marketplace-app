@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace MarketPlace.Domain.Models;
 
 public class Review

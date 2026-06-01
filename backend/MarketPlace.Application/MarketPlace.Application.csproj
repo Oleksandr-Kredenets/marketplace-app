@@ -12,7 +12,7 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
         <ProjectReference Include="../MarketPlace.Domain/MarketPlace.Domain.csproj"/>
-        <ProjectReference Include="..\MarketPlace.Persistance\MarketPlace.Persistance.csproj" />
+        <ProjectReference Include="..\MarketPlace.Infrastructure\MarketPlace.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

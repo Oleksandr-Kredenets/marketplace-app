@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Interfaces;
 
-namespace MarketPlace.Persistance.Repositories;
+namespace MarketPlace.Infrastructure.Repositories;
 public class ProductRepository : IProductRepository
 {
     private readonly MarketPlaceDbContext _database;

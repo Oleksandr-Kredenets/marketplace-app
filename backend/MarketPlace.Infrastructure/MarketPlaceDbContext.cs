@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MarketPlace.Domain.Models;
 
-namespace MarketPlace.Persistance;
+namespace MarketPlace.Infrastructure;
 public class MarketPlaceDbContext : DbContext
 {
     public MarketPlaceDbContext(DbContextOptions<MarketPlaceDbContext> options)

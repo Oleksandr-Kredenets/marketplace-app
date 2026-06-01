@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MarketPlace.Persistance;
+using MarketPlace.Infrastructure;
 using MarketPlace.Application.Extensions;
-namespace MarketPlace.API;
+namespace MarketPlace.Web;
 
 public static class Program
 {
@@ -10,7 +10,6 @@ public static class Program
         var builder = WebApplication.CreateBuilder(args);
         
         string? connectionString = builder.Configuration.GetConnectionString("PostgreSQL");
-        Console.WriteLine($"Connection string: '{connectionString}'");
         builder.Services.AddDbContext<MarketPlaceDbContext>(options =>
             options.UseNpgsql(connectionString));
 

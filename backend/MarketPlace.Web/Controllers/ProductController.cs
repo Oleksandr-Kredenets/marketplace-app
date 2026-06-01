@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MarketPlace.Domain.Models;
-using MarketPlace.API.Contracts;
+using MarketPlace.Web.Contracts;
 using MarketPlace.Application.Interfaces;
+using MarketPlace.Application.Dto;
 
-namespace MarketPlace.API.Controllers;
+namespace MarketPlace.Web.Controllers;
 
 [ApiController]
 [Route("/products")]
@@ -25,21 +26,26 @@ public class ProductController : Controller
 
     [HttpGet("{slug}")]
     public async Task<IActionResult> GetProduct(string slug){
-        Product? product = await _productService.GetProductBySlugAsync(slug);
+        var product = await _productService.GetProductBySlugAsync(slug);
         if (product == null) return NotFound("Product not found");
         return Ok(Json(product));
     }
 
+    //   multipart/form-data
     [HttpPost]
-    public async Task<IActionResult> CreateProduct(PostProductDto productRequest)
+    public async Task<IActionResult> CreateProduct([FromForm]PostProductContract product)
     {
-        
-        Product newProduct = new Product(productRequest.UserId, productRequest.Title,
-                                         productRequest.Price, productRequest.Description);
-
-        newProduct.Slug = _productService.GenerateSlug(newProduct);
-
-        if (await _productService.AddProductAsync(newProduct) != null)
+        var imageStream = product.Image.OpenReadStream();
+        if (imageStream == null || imageStream.Length == 0)
+        {
+            return BadRequest(RedirectToAction("GetAllProducts"));
+        }
+        ProductRequest productRequest = new ProductRequest(product.UserId, product.Title, product.Price,
+                                                           imageStream, product.Description);
+    
+        var result = await _productService.AddProductAsync(productRequest);
+        imageStream.Close();
+        if (result != null)
         {
             return RedirectToAction("GetAllProducts");
         }
@@ -49,14 +55,14 @@ public class ProductController : Controller
         }
     }
 
+//  TODO: Update image
     [HttpPut]
-    public async Task<IActionResult> UpdateProduct([FromBody]PutProductDto productRequest)
+    public async Task<IActionResult> UpdateProduct([FromBody]PutProductContract productRequest)
     {
-        Product updatedProduct = new Product(Guid.Empty,
-                                             productRequest.Title,
-                                             productRequest.Price,
-                                             productRequest.Description);
-        updatedProduct.Id = productRequest.Id;
+        var updatedProduct = new ProductDataRequest(productRequest.Id,
+                                                    productRequest.Title,
+                                                    productRequest.Price,
+                                                    productRequest.Description);
         await _productService.UpdateProductAsync(updatedProduct);
         return RedirectToAction("GetAllProducts");
     }
