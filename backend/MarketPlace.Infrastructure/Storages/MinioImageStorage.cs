@@ -1,22 +1,22 @@
 using System.Threading.Tasks;
 using MarketPlace.Infrastructure.Interfaces;
 using MarketPlace.Infrastructure.Collections;
+using MarketPlace.Infrastructure.Options;
 using Minio;
 using Minio.DataModel.Args;
+using Microsoft.Extensions.Options;
 namespace MarketPlace.Infrastructure.Storages;
 public class MinioImageStorage : IImageStorage
 {
-    private string endpoint;
-    private string bucketName;
+    private readonly MinioImageStorageOptions _options;
     private IMinioClient minioClient;
 
-    public MinioImageStorage()
+    public MinioImageStorage(IOptions<MinioImageStorageOptions> options)
     {
-        endpoint = "localhost:9000";
-        bucketName = "product-images";
+        _options = options.Value;
         minioClient = new MinioClient()
-                         .WithEndpoint(endpoint)
-                         .WithCredentials("admin", "sqgl5j399jk9")
+                         .WithEndpoint(_options.Endpoint)
+                         .WithCredentials(_options.AccessKey, _options.SecretKey)
                          .WithSSL(false)
                          .Build();
     }
@@ -24,7 +24,7 @@ public class MinioImageStorage : IImageStorage
     public async Task<string> GetImageUrlAsync(string imageName)
     {
         var args = new PresignedGetObjectArgs()
-                       .WithBucket(bucketName)
+                       .WithBucket(_options.BucketName)
                        .WithObject(imageName)
                        .WithExpiry(60 * 60);
         return await minioClient.PresignedGetObjectAsync(args).ConfigureAwait(false);
@@ -33,7 +33,7 @@ public class MinioImageStorage : IImageStorage
     {
         //if (!FileTypes.Types.Contains(type)) return;
         PutObjectArgs putObjectArgs = new PutObjectArgs()
-                                          .WithBucket(bucketName)
+                                          .WithBucket(_options.BucketName)
                                           .WithObject(imageObjectName)
                                           .WithStreamData(imageStream)
                                           .WithObjectSize(imageStream.Length);
@@ -45,7 +45,7 @@ public class MinioImageStorage : IImageStorage
     public async void DeleteImageSync(string imageObjectName)
     {
         RemoveObjectArgs removeObjectArgs = new RemoveObjectArgs()
-                                               .WithBucket(bucketName)
+                                               .WithBucket(_options.BucketName)
                                                .WithObject(imageObjectName);
         await minioClient.RemoveObjectAsync(removeObjectArgs).ConfigureAwait(false);
     }

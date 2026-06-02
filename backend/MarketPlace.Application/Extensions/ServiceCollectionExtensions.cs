@@ -5,6 +5,7 @@ using MarketPlace.Application.Services;
 using MarketPlace.Infrastructure.Repositories;
 using MarketPlace.Infrastructure.Storages;
 using MarketPlace.Infrastructure.Interfaces;
+using MarketPlace.Infrastructure.Options;
 
 namespace MarketPlace.Application.Extensions;
 public static class ServiceCollectionExtentions
