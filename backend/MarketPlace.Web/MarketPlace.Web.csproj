@@ -16,6 +16,7 @@
 
         <ProjectReference Include="..\MarketPlace.Domain\MarketPlace.Domain.csproj" />
         <ProjectReference Include="..\MarketPlace.Application\MarketPlace.Application.csproj" />
+        <ProjectReference Include="..\MarketPlace.Infrastructure\MarketPlace.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

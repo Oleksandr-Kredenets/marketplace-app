@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MarketPlace.Infrastructure;
 using MarketPlace.Infrastructure.Options;
-using MarketPlace.Application.Extensions;
+using MarketPlace.Web.Extensions;
 namespace MarketPlace.Web;
 
 public static class Program

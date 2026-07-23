@@ -1,13 +1,10 @@
-using Microsoft.Extensions.DependencyInjection;
 using MarketPlace.Domain.Interfaces;
 using MarketPlace.Application.Interfaces;
 using MarketPlace.Application.Services;
-using MarketPlace.Infrastructure.Repositories;
 using MarketPlace.Infrastructure.Storages;
-using MarketPlace.Infrastructure.Interfaces;
-using MarketPlace.Infrastructure.Options;
+using MarketPlace.Infrastructure.Repositories;
 
-namespace MarketPlace.Application.Extensions;
+namespace MarketPlace.Web.Extensions;
 public static class ServiceCollectionExtentions
 {
     public static IServiceCollection AddProjectServices(this IServiceCollection services)

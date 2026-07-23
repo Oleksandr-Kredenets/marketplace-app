@@ -1,4 +1,4 @@
-namespace MarketPlace.Infrastructure.Interfaces;
+namespace MarketPlace.Application.Interfaces;
 public interface IImageStorage
 {
     public Task<string> GetImageUrlAsync(string imageName);

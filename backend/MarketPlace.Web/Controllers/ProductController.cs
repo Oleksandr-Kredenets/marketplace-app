@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using MarketPlace.Domain.Models;
-using MarketPlace.Web.Contracts;
 using MarketPlace.Application.Interfaces;
 using MarketPlace.Application.Dto;
+using MarketPlace.Application.Query.Sorting;
+using MarketPlace.Infrastructure.Collections;
+using MarketPlace.Web.Contracts;
 
 namespace MarketPlace.Web.Controllers;
 
@@ -18,9 +19,15 @@ public class ProductController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllProducts()
+    public async Task<IActionResult> GetAllProducts([FromQuery]SortProductContract args)
     {
-        var products = await _productService.GetAllProductsAsync();
+        var argsRequest = new ProductSortArgs
+        {
+            SortBy = args.SortBy,
+            Dimension = args.Dimension
+        };
+
+        var products = await _productService.GetAllProductsAsync(argsRequest);
         return Ok(Json(products));
     }
 
@@ -31,11 +38,14 @@ public class ProductController : Controller
         return Ok(Json(product));
     }
 
-    //   multipart/form-data
     [HttpPost]
     public async Task<IActionResult> CreateProduct([FromForm]PostProductContract product)
     {
         var imageStream = product.Image.OpenReadStream();
+        if (!FileTypes.Types.Contains(product.Image.ContentType))
+        {
+            return StatusCode(StatusCodes.Status415UnsupportedMediaType);
+        }
         if (imageStream == null || imageStream.Length == 0)
         {
             return BadRequest(RedirectToAction("GetAllProducts"));
@@ -45,6 +55,7 @@ public class ProductController : Controller
     
         var result = await _productService.AddProductAsync(productRequest);
         imageStream.Close();
+        
         if (result != null)
         {
             return RedirectToAction("GetAllProducts");
@@ -55,7 +66,6 @@ public class ProductController : Controller
         }
     }
 
-//  TODO: Update image
     [HttpPut]
     public async Task<IActionResult> UpdateProduct([FromBody]PutProductContract productRequest)
     {

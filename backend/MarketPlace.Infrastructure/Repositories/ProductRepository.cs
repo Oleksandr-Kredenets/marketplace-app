@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using MarketPlace.Domain.Models;
+using MarketPlace.Domain.Collections;
 using MarketPlace.Domain.Interfaces;
+using MarketPlace.Infrastructure.Extensions;
+using MarketPlace.Application.Query.Sorting;
 
 namespace MarketPlace.Infrastructure.Repositories;
 public class ProductRepository : IProductRepository
@@ -12,10 +15,12 @@ public class ProductRepository : IProductRepository
         _database = database;
     }
 
-    public async Task<List<Product>> GetAllProductsAsync()
+    public async Task<List<Product>> GetAllProductsAsync(ProductQuery args)
     {
+        var query = args.ArgsTo();
         List<Product> products = await _database.Products
                 .AsNoTracking()
+                .Sort(query)
                 .ToListAsync();
 
         return products;

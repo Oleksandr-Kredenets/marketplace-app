@@ -1,10 +1,8 @@
-using System.Threading.Tasks;
-using MarketPlace.Infrastructure.Interfaces;
-using MarketPlace.Infrastructure.Collections;
-using MarketPlace.Infrastructure.Options;
+using Microsoft.Extensions.Options;
 using Minio;
 using Minio.DataModel.Args;
-using Microsoft.Extensions.Options;
+using MarketPlace.Application.Interfaces;
+using MarketPlace.Infrastructure.Options;
 namespace MarketPlace.Infrastructure.Storages;
 public class MinioImageStorage : IImageStorage
 {
@@ -31,13 +29,11 @@ public class MinioImageStorage : IImageStorage
     }
     public async void UploadImageSync(string imageObjectName, Stream imageStream)
     {
-        //if (!FileTypes.Types.Contains(type)) return;
         PutObjectArgs putObjectArgs = new PutObjectArgs()
                                           .WithBucket(_options.BucketName)
                                           .WithObject(imageObjectName)
                                           .WithStreamData(imageStream)
                                           .WithObjectSize(imageStream.Length);
-                                          //.WithContentType(type);
         
         await minioClient.PutObjectAsync(putObjectArgs).ConfigureAwait(false);
     }

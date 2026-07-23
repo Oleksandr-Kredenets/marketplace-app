@@ -16,6 +16,7 @@
         <PackageReference Include="Minio" Version="7.0.0" />
 
         <ProjectReference Include="../MarketPlace.Domain/MarketPlace.Domain.csproj"/>
+        <ProjectReference Include="../MarketPlace.Application/MarketPlace.Application.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

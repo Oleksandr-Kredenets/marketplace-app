@@ -20,13 +20,6 @@ export default function AddForm({isActive, setFormActive}: AddFormProps){
         e.preventDefault();
 
         const formData = new FormData();
-        /*  = {
-            UserId: "3e192f73-0ef6-43be-b2f5-cf2708f803ad",
-            Title: productTitle,
-            Price: Number(productPrice),
-            Description: productDescription,
-            ImageCount: 1
-        } */
         formData.append('userId', '3e192f73-0ef6-43be-b2f5-cf2708f803ad');
         formData.append('title', `${productTitle}`);
         formData.append('price', `${Number(productPrice)}`);

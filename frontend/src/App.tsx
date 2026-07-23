@@ -47,7 +47,6 @@ export default function App() {
     // Main app
     return (
         <div className="flex justify-center items-center">
-            {/*??? images ??? */}
             <ProductContainer products={products}/>
             <AddButton onClick={() => setAddFormActive(!addFormActive)}/>
             <AddForm isActive={addFormActive} setFormActive={setAddFormActive}/>

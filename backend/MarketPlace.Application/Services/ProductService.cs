@@ -3,7 +3,7 @@ using MarketPlace.Domain.Models;
 using MarketPlace.Domain.Interfaces;
 using MarketPlace.Application.Interfaces;
 using MarketPlace.Application.Dto;
-using MarketPlace.Infrastructure.Interfaces;
+using MarketPlace.Application.Query.Sorting;
 namespace MarketPlace.Application.Services;
 
 public class ProductService : IProductService
@@ -25,9 +25,9 @@ public class ProductService : IProductService
         return slug;
     }
 
-    public async Task<List<ProductResponse>> GetAllProductsAsync()
+    public async Task<List<ProductResponse>> GetAllProductsAsync(ProductSortArgs args)
     {
-        List<Product> productsData = await _productRepository.GetAllProductsAsync();
+        List<Product> productsData = await _productRepository.GetAllProductsAsync(args);
         var products = new List<ProductResponse>();
         foreach (var productData in productsData)
         {
